@@ -1,45 +1,40 @@
 import { styled } from 'styled-components';
 import logo from '../../assets/images/logo.png';
 import { FaSignInAlt, FaRegUser } from 'react-icons/fa';
-
-const CATEGORY = [
-    {
-        id: null,
-        name: '전체',
-    },
-    {
-        id: 0,
-        name: '동화',
-    },
-    {
-        id: 1,
-        name: '소설',
-    },
-    {
-        id: 2,
-        name: '사회',
-    },
-];
+import { Link } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { Category } from '../../models/category.model';
+import { fetchCategory } from '../../api/category.api';
 
 function Header() {
+    const [category, setCategory] = useState<Category[]>([]);
+
+    useEffect(() => {
+        fetchCategory().then((category) => {
+            setCategory(category);
+        });
+    }, []);
+
     return (
         <HeaderStyle>
             <h1 className='logo'>
-                <img src={logo} alt='book store' />
+                <Link to='/'>
+                    <img src={logo} alt='book store' />
+                </Link>
             </h1>
             <nav className='category'>
                 <ul>
-                    {CATEGORY.map((category) => (
-                        <li key={category.id}>
-                            <a
-                                href={
-                                    category.id === null
+                    {category.map((item) => (
+                        <li key={item.id}>
+                            <Link
+                                to={
+                                    item.id === null
                                         ? '/books'
-                                        : `/books?category_id=${category.id}`
+                                        : `/books?category_id=${item.id}`
                                 }
                             >
-                                {category.name}
-                            </a>
+                                {item.name}
+                            </Link>
                         </li>
                     ))}
                 </ul>
@@ -47,12 +42,16 @@ function Header() {
             <nav className='auth'>
                 <ul>
                     <li>
-                        <a href='/login'>
-                            <FaSignInAlt />로그인</a>
+                        <Link to='/login'>
+                            <FaSignInAlt />
+                            로그인
+                        </Link>
                     </li>
                     <li>
-                        <a href='/signup'>
-                            <FaRegUser />회원가입</a>
+                        <Link to='/signup'>
+                            <FaRegUser />
+                            회원가입
+                        </Link>
                     </li>
                 </ul>
             </nav>
