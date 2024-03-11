@@ -51,7 +51,7 @@ function AddToCart({ book }: Props) {
             </Button>
             <div className='added'>
                 <p>장바구니에 추가되었습니다.</p>
-                <Link to='/cart'>장바구니로 이동</Link>
+                <Link to='/carts'>장바구니로 이동</Link>
             </div>
         </AddToCartStyle>
     );
