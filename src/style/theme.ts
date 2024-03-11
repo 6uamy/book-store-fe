@@ -2,7 +2,7 @@ export type ThemeName = 'light' | 'dark';
 export type ColorKey = 'primary' | 'background' | 'secondary' | 'third' | 'border' | 'text';
 export type HeadingSize = 'small' | 'medium' | 'large';
 export type ButtonSize = 'small' | 'medium' | 'large';
-export type ButtonScheme = 'primary' | 'normal';
+export type ButtonScheme = 'primary' | 'normal' | 'like';
 export type LayoutWidth = 'small' | 'medium' | 'large';
 
 interface Theme {
@@ -79,6 +79,10 @@ export const light: Theme = {
             color: 'black',
             backgroundColor: 'lightgray',
         },
+        like: {
+            color: 'white',
+            backgroundColor: 'coral',
+        }
     },
     borderRadius: {
         default: '4px',
